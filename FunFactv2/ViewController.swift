@@ -10,9 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var FactLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        FactLabel.text = randomFact()
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,6 +22,15 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func showMore() {
+        FactLabel.text = randomFact()
+    }
 
+    @IBAction func shareButton(_ sender: Any) {
+        let activity = UIActivityViewController(activityItems: ["I just learned that:", FactLabel.text," via the Fun Fact app!"], applicationActivities: nil)
+        activity.popoverPresentationController?.sourceView = self.view
+        
+        self.present(activity, animated: true, completion: nil)
+    }
 }
 
